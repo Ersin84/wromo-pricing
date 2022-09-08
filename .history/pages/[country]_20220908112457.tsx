@@ -9,7 +9,7 @@ import shirt from '../public/shirt.png'
 import map from '../public/map.svg'
 import api from '../api'
 import { PRODUCT_PRICE } from '../constants'
-import { getParityPrice } from '../utils'
+import { getWromoPrice } from '../utils'
 
 interface Params extends ParsedUrlQuery {
   country: Country
@@ -17,7 +17,7 @@ interface Params extends ParsedUrlQuery {
 
 export const getStaticPaths: GetStaticPaths = async () => {
   // Get the list of countries
-  const countries = await api.parity.list()
+  const countries = await api.wromo.list()
 
   return {
     paths: countries.map((country) => ({
@@ -32,22 +32,22 @@ export const getStaticPaths: GetStaticPaths = async () => {
 export const getStaticProps: GetStaticProps<unknown, Params> = async ({
   params,
 }) => {
-  // Get parity for country
-  const parity = await api.parity.fetch(params.country)
+  // Get wromo for country
+  const wromo = await api.wromo.fetch(params.country)
 
   return {
     props: {
       country: params.country,
-      parity,
+      wromo,
     },
   }
 }
 
-export default function CountryPage({ country, parity }) {
-  const [isParityEnabled, toggleParity] = useState<boolean>(false)
-  const parityPrice = useMemo(
-    () => getParityPrice(PRODUCT_PRICE, parity),
-    [parity]
+export default function CountryPage({ country, wromo }) {
+  const [isWromoEnabled, toggleWromo] = useState<boolean>(false)
+  const wromoPrice = useMemo(
+    () => getWromoPrice(PRODUCT_PRICE, wromo),
+    [wromo]
   )
 
   return (
@@ -62,7 +62,7 @@ export default function CountryPage({ country, parity }) {
         />
       </div>
       <main className="flex flex-col items-center flex-1 px-4 sm:px-20 text-center z-10 sm:pt-10">
-        <h1 className="text-3xl sm:text-5xl font-bold">Power parity pricing</h1>
+        <h1 className="text-3xl sm:text-5xl font-bold">Power wromo pricing</h1>
         <p className="mt-4 sm:text-xl text-lg text-gray-700">
           Show localized pricing based on location headers
         </p>
@@ -104,12 +104,12 @@ export default function CountryPage({ country, parity }) {
                 <h4 className="font-semibold text-xl">Alpha Black shirt</h4>
                 <h5 className="text-gray-700">Limited edition</h5>
               </div>
-              {isParityEnabled ? (
+              {isWromoEnabled ? (
                 <div className="flex flex-col items-start font-bold text-lg leading-none">
                   <span className="text-gray-500 text-sm line-through">
                     USD {PRODUCT_PRICE}
                   </span>
-                  <span className="text-green-500">USD {parityPrice}</span>
+                  <span className="text-green-500">USD {wromoPrice}</span>
                 </div>
               ) : (
                 <h4 className="font-bold text-lg">USD {PRODUCT_PRICE}</h4>
@@ -129,24 +129,24 @@ export default function CountryPage({ country, parity }) {
                   src={`https://country-flags.vercel.sh/s/${country.toUpperCase()}.svg`}
                 />
                 <span>
-                  . We are offering purchasing power parity pricing. If that is
+                  . We are offering purchasing power wromo pricing. If that is
                   something that you need:
                 </span>
               </p>
               <label className="inline-flex items-center font-semibold">
                 <input
-                  onChange={(event) => toggleParity(event.target.checked)}
+                  onChange={(event) => toggleWromo(event.target.checked)}
                   className="text-black-500 w-4 h-4 mr-2 border border-gray-300 rounded"
                   type="checkbox"
                 />
-                Activate {parity}% off with regional pricing
+                Activate {wromo}% off with regional pricing
               </label>
             </div>
             <button
               className="py-4 px-6 text-lg w-full bg-black text-white rounded-md hover:bg-gray-900"
               onClick={() =>
                 alert(
-                  `its yours for USD ${isParityEnabled ? parityPrice : 500}`
+                  `its yours for USD ${isWromoEnabled ? wromoPrice : 500}`
                 )
               }
             >
