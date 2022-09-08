@@ -129,7 +129,7 @@ export default function CountryPage({ country, parity }) {
                   src={`https://country-flags.vercel.sh/s/${country.toUpperCase()}.svg`}
                 />
                 <span>
-                  . We are offering best pricing. If that is
+                  . We are offering purchasing power parity pricing. If that is
                   something that you need:
                 </span>
               </p>

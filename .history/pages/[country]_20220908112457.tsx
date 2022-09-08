@@ -58,21 +58,21 @@ export default function CountryPage({ country, parity }) {
           src={map}
           layout="fill"
           objectFit="cover"
-          quality={101}
+          quality={100}
         />
       </div>
       <main className="flex flex-col items-center flex-1 px-4 sm:px-20 text-center z-10 sm:pt-10">
-        <h1 className="text-3xl sm:text-5xl font-bold">Power Studio Wromo</h1>
+        <h1 className="text-3xl sm:text-5xl font-bold">Power parity pricing</h1>
         <p className="mt-4 sm:text-xl text-lg text-gray-700">
-          Show pricing
+          Show localized pricing based on location headers
         </p>
         <a
           className="flex items-center mt-4 text-md sm:text-lg text-blue-500 hover:underline"
-          href="https://wromo-pricing.vercel.app/headers#request-shop?utm_source=geo-ip-demo&utm_campaign=geo-ip-demo"
+          href="https://vercel.com/docs/edge-network/headers#request-headers?utm_source=geo-ip-demo&utm_campaign=geo-ip-demo"
           target="_blank"
           rel="noreferrer"
         >
-          View Shop
+          View headers documentation
           <svg
             viewBox="0 0 24 24"
             width="16"
@@ -129,7 +129,7 @@ export default function CountryPage({ country, parity }) {
                   src={`https://country-flags.vercel.sh/s/${country.toUpperCase()}.svg`}
                 />
                 <span>
-                  . We are offering best pricing. If that is
+                  . We are offering purchasing power parity pricing. If that is
                   something that you need:
                 </span>
               </p>
@@ -146,7 +146,7 @@ export default function CountryPage({ country, parity }) {
               className="py-4 px-6 text-lg w-full bg-black text-white rounded-md hover:bg-gray-900"
               onClick={() =>
                 alert(
-                  `its yours for USD ${isParityEnabled ? parityPrice : 390}`
+                  `its yours for USD ${isParityEnabled ? parityPrice : 500}`
                 )
               }
             >
