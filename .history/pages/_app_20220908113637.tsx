@@ -9,7 +9,7 @@ export default function MyApp({ Component, pageProps }: AppProps) {
   return (
     <Layout
       title="Power Studio Wromo"
-      path="*/wromo-pricing"
+      path="/"
     >
       <Component {...pageProps} />
     </Layout>
